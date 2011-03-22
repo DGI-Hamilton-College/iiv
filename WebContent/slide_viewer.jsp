@@ -15,13 +15,12 @@
     <script src="/iiv/js/jquery-ui-1.7.2.custom.min.js"></script>
     <script src="/iiv/js/slideviewer.js"></script>
     <script>
-
     document.write('<div class="iiv"></div>');
     $(document).ready(function() {
       var viewer = new iiv.Viewer({
         pid: '${param.pid}',
-        cmodel: 'islandora:slideCModel',
-        dsid: 'JP2',
+        cmodel: '${param.cmodel}',
+        dsid: '${param.dsid}',
         uid: '${param.uid}'})
     });
     </script>

@@ -101,18 +101,18 @@ iiv.Viewer = new iiv.Class({
           isBaseLayer : true,
           layername : 'basic',
           format : 'image/jpeg',
-          rft_id :  this.rftUrl(pid), 
-          metadataUrl : djatokaUrl + '/getMetadata?uid=' + this.uid
+        rft_id :  this.rftUrl(pid, this.dsid), 
+          metadataUrl : djatokaUrl + '/getMetadata?dsid=' + this.dsid + '&uid=' + this.uid
         });
     
     imageLayer.djatokaUrl = djatokaUrl;
     imageLayer.uid = this.uid;
-
+    imageLayer.dsid = this.dsid;
     return imageLayer;
   },
   
-  rftUrl: function(pid) {
-    return this.djatokaUrl(pid) + '/JP2?uid=djatoka';
+    rftUrl: function(pid, dsid) {
+    return this.djatokaUrl(pid) + '/' + dsid + '?uid=djatoka';
   },
   
   currentPid: function() {
@@ -174,7 +174,7 @@ iiv.Viewer = new iiv.Class({
     var level = '3'; // TODO calculate
     
     // assemble url
-    var imageUrl = this.djatokaUrl(this.currentPid()) + '/getRegion?uid=' + this.uid + '&level=' + level + '&scale=' + scale; 
+    var imageUrl = this.djatokaUrl(this.currentPid()) + '/getRegion?dsid=' + this.dsid + '&uid=' + this.uid + '&level=' + level + '&scale=' + scale; 
     var printUrl = '/iiv/print.html?pid=' + this.currentPid() + '&image=' + escape(imageUrl);
     
     return printUrl;
@@ -509,7 +509,7 @@ iiv.Viewer.ImageLayer = OpenLayers.Class(OpenLayers.Layer.OpenURL, {
     var z = this.map.getZoom() + this.zoomOffset;
     
     // uid and djatokaUrl set in createImageLayer
-    var path = this.djatokaUrl + '/getRegion?uid=' + this.uid + '&level=' + z 
+    var path = this.djatokaUrl + '/getRegion?dsid=' + this.dsid + '&uid=' + this.uid + '&level=' + z 
       + '&region=' + this.tilePos.lat + "," + this.tilePos.lon + "," + this.imageSize.h + "," + this.imageSize.w;
     
     var url = this.url;
