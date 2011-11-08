@@ -19,6 +19,7 @@
 
     document.write('<div class="iiv"></div>');
     $(document).ready(function() {
+    alert("initializing")
       var viewer = new iiv.Viewer({
         pid: '${param.pid}',
         cmodel: 'ilives:pageCModel',
